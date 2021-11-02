@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>CREAR DOSIMETRO principal</title>
+</head>
+<body>
+    <h1>CREAR DOSIMETRO</h1>
+    <form action="registrar_dosimetro.php" method="POST">
+        <table>
+            <tr>
+                <td>NÚMERO DOSÍMETRO:</td>
+                <td><input type="number" name="numero_dosimetro" id="numero_dosimetro"></td>
+            </tr>
+            <tr>
+                <td>TIPO DE DOSÍMERTRO:</td>
+                <td>&nbsp;
+                    <select name="tipo_dosimetro" id="tipo_dosimetro" style="text-transform:uppercase;">
+                        <option value="">Seleccione...</option>
+                        <option value="Anillo">Anillo</option>
+                        <option value="Pulcera">Pulcera</option>
+                        <option value="Cristalino">Cristalino</option>
+                        <option value="Cuerpo entero">Cuerpo entero</option>
+                    </select>
+                </td>
+                <td>FECHA DE INGRESO AL SERVICIO:</td>
+                <td><input type="date" name="fechaIngresoServicio_dosimetro" id="fechaIngresoServicio_dosimetro"></td>
+            </tr>
+            <tr>
+                <td>OCUPACIÓN DEL DOSÍMETRO:</td>
+                <td>&nbsp;
+                    <select name="ocupacion_dosimetro" id="ocupacion_dosimetro" style="text-transform:uppercase;">
+                        <option value="">Seleccione...</option>
+                        <option value="Mensual">Mensual</option>
+                        <option value="Trimestral">Trimestral</option>
+                    </select>
+                </td>
+                <td>PERIODO DE RECAMBIO:</td>
+                <td>&nbsp;
+                    <select name="periodoRecam_dosimetro" id="periodoRecam_dosimetro" style="text-transform:uppercase;">
+                        <option value="">Seleccione...</option>
+                        <option value="Mensual">Mensual</option>
+                        <option value="Trimestral">Trimestral</option>
+                    </select>
+                </td>    
+            </tr>
+            <tr>
+                <td>ENERGÍA:</td>
+                <td>&nbsp;
+                    <select name="energia_dosimetro" id="energia_dosimetro" style="text-transform:uppercase;">
+                        <option value="">Seleccione...</option>
+                        <option value="Fotones">Fotones</option>
+                        <option value="Potrones">Potrones</option>
+                        <option value="Beta">Beta</option>
+                    </select>
+                </td>
+                <td>ZERO LEVEL DATE:</td>
+                <td><input type="date" name="zeroLevelDate" id="zeroLevelDate"></td>
+            </tr>
+            <tr>
+                <td>MEASUREMENT DATE:</td>
+                <td><input type="date" name="measurementDate" id="measurementDate"></td>
+                <td>Hp007_CALC_DOSE:</td>
+                <td><input type="number" step="0.001" name="hp007CalcDose" id="hp007CalcDose"></td>
+            </tr>
+            <tr>
+                <td>Hp007_BACKGROUND_DOSE</td>
+                <td><input type="number" step="0.001" name="hp007BackgroundDose" id="hp007BackgroundDose"></td>
+                <td>Hp007_RAW_DOSE</td>
+                <td><input type="number" step="0.001" name="hp007RawDose" id="hp007RawDose"></td>
+            </tr>
+            <tr>
+                <td>Hp10_CALC_DOSE:</td>
+                <td><input type="number" step="0.001" name="hp10CalcDose" id="hp10CalcDose"></td>
+                <td>Hp10_BACKGROUND_DOSE:</td>
+                <td><input type="number" step="0.001" name="hp10BackgroundDose" id="hp10BackgroundDose"></td>
+            </tr>
+            <tr>
+                <td>Hp10_RAW_DOSE:</td>
+                <td><input type="number" step="0.001" name="hp10RawDose" id="hp10RawDose"></td>
+                <td>EzClip_CALC_DOSE:</td>
+                <td><input type="number" step="0.001" name="ezclipCalcDose" id="ezclipCalcDose"></td>
+            </tr>
+            <tr>
+                <td>EzClip_BACKGROUND_DOSE:</td>
+                <td><input type="number" step="0.001" name="ezclipBackgroundDose" id="ezclipBackgroundDose"></td>
+                <td>EzClip_raw_dose:</td>
+                <td><input type="number" step="0.001" name="ezclipRawDose" id="ezclipRawDose"></td>
+            </tr>
+            <tr>
+                <td>VERIFICATION_DATE</td>
+                <td><input type="date" name="verificationDate" id="verificationDate"></td>
+                <td>VERIFICATION_REQUIRED_ON_OR_BEFORE: </td>
+                <td><input type="date" name="verificationRequiredBefore" id="verificationRequiredBefore"></td>
+            </tr>
+            <tr>
+                <td>REMAINIG_DAYS_AVAILABLE_FOR_USE:</td>
+                <td><input type="number" name="remainingDaysForUse" id="remainingDaysForUse"></td>
+                
+                <td><input type="submit" value="Enviar"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
