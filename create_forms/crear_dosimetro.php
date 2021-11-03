@@ -1,13 +1,73 @@
 <!DOCTYPE html>
 <?php
     require('conexion.php');
-    $query1 = "SELECT codigo_dosimeter, tipo_dosimetro, fecha_ingreso_servicio, ocupacion, periodo_recambio FROM dosimetro ORDER BY codigo_dosimeter";
+    $query1 = "SELECT codigo_dosimeter, tipo_dosimetro, fecha_ingreso_servicio, ocupacion, periodo_recambio, id_dosimetro FROM dosimetro ORDER BY codigo_dosimeter";
     $resultado1 = $mysqli->query($query1);
 ?>
 <html>
 <head>
     <meta charset="utf-8">
     <title>CREAR DOSIMETRO principal</title>
+    <script
+        src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous">
+    </script>
+    <!-- <script>
+        /*  $(document).ready(function(){
+            $("#linkEditar").click(function(){
+                $.ajax({
+                type:"POST",
+                url:"consultaMD_dosimetro.php",
+                data:"Ndosimetro=" + $('#linkEditar').val(),
+            });
+            
+            });
+        });  */
+        function objetoAjax(){
+            var xmlhttp=false;
+            try{
+                xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+            }catch(e){
+                try{
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }catch(E){
+                    xmlhttp = false;
+                }
+            }
+            if(!xmlhttp && typeof XMLHttpRequest!='undefined'){
+                xmlhttp = new XMLHttpRequest();
+            }
+            return xmlhttp;
+        }
+        function Guardar(){
+            valor = document.getElementById('linkEditar').value;
+            alert(linkEditar);
+        } 
+    </script> -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#linkEditar").click(function(){
+                $.post("consultaMD_dosimetro.php",{ Ndosimetro:"$id_dosimetro");
+                    .done(function( data ) {
+                    alert( "Data Loaded: " + data );
+  });
+            })
+        })
+        /* function enviarID(id){
+            $.ajax({
+                type:"POST",
+                url:"consultaMD_dosimetro.php",
+                data:"Ndosimetro=" + 'id'.val(),
+                success: function (result){
+                    alert(result);
+                } 
+            }).done(function(info){
+            alert(info);
+            });
+           
+        } */
+    </script>
 </head>
 <body>
     <h1>CREAR DOSÍMETRO</h1>
@@ -106,32 +166,41 @@
             </tr>
         </table>
     </form>
-    <br>
-    <h2 align="center">TODOS LOS DOSÍMETROS</h2>
-    <table border="1" align="center">
-        <tr>
-            <th>CODIGO</th> <th>TIPO DE DOSÍMERTRO</th> <th>FECHA DE INGRESO AL SERVICIO</th> 
-            <th>OCUPACIÓN DEL DOSÍMETRO</th> <th>PERIODO DE RECAMBIO</th>
-        </tr>
-        <?php
-            while($dosimetros = mysqli_fetch_array($resultado1)){
-                $codigo = $dosimetros['0'];
-                $tipo = $dosimetros['1'];
-                $fechaIng = $dosimetros['2'];
-                $ocupacion = $dosimetros['3'];
-                $periodoRCam = $dosimetros['4'];
 
-                echo "<tr>";
-                echo "<td>";  echo $codigo;     echo "</td>";
-                echo "<td>";  echo $tipo;       echo "</td>";
-                echo "<td>";  echo $fechaIng;   echo "</td>";
-                echo "<td>";  echo $ocupacion;  echo "</td>";
-                echo "<td>";  echo $periodoRCam;echo "</td>";
-                echo "</tr>";
-            }
-            mysqli_free_result($resultado1);
-            mysqli_close($mysqli);
-        ?>
-    </table>
+    <br>
+    <!--  AQUI ENPIEZA LA TABLA PARA VER TODOS LOS REGISTROS DE DOSIMETROS-->
+    <h2 align="center">TODOS LOS DOSÍMETROS</h2>
+    <div id= 'numerodosi'>
+        <table border="1" align="center">
+            <tr>
+                <th>CODIGO</th> <th>TIPO DE DOSÍMERTRO</th> <th>FECHA DE INGRESO AL SERVICIO</th> 
+                <th>OCUPACIÓN DEL DOSÍMETRO</th> <th>PERIODO DE RECAMBIO</th><th>MODIFICAR</th><th>ELIMINAR</th>
+            </tr>
+            <?php
+                while($dosimetros = mysqli_fetch_array($resultado1)){
+                    $codigo = $dosimetros['0'];
+                    $tipo = $dosimetros['1'];
+                    $fechaIng = $dosimetros['2'];
+                    $ocupacion = $dosimetros['3'];
+                    $periodoRCam = $dosimetros['4'];
+                    $id_dosimetro = $dosimetros['5'];
+
+
+                    echo "<tr>";
+                    echo "<td>";  echo $codigo;     echo "</td>";
+                    echo "<td>";  echo $tipo;       echo "</td>";
+                    echo "<td>";  echo $fechaIng;   echo "</td>";
+                    echo "<td>";  echo $ocupacion;  echo "</td>";
+                    echo "<td>";  echo $periodoRCam;echo "</td>";
+                    echo "<td>";  echo "<a id='linkEditar' type='submit' value='$id_dosimetro' href='consultaMD_dosimetro.php' target='_blank'>EDITAR</a>"; echo "</td>";
+                    echo "<td>";  echo "<a href='' value='eliminar'><img src='eliminar.png' ></a>"; echo "</td>";
+                    echo "</tr>";
+                }
+                mysqli_free_result($resultado1);
+                mysqli_close($mysqli);
+            ?>
+        </table>
+    </div>
+   
 </body>
 </html>

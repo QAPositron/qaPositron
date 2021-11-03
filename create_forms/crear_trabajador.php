@@ -57,7 +57,7 @@
                             {   $idEmpresa = $row["id_empresa"];
                                 $nitEmpresa = $row["nit_empresa"];
                                 $nombreEmpresa = $row["nombre_empresa"];
-                                echo "<option value=".$idEmpresa.">(".$nitEmpresa." ) ".$nombreEmpresa."</option>";
+                                echo "<option value=".$idEmpresa.">(".$nitEmpresa.") ".$nombreEmpresa."</option>";
                             }
                         ?>
                 </select>
