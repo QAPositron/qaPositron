@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
@@ -38,6 +39,10 @@
         require('conexion.php');
         $query1 = "SELECT id_empresa, nombre_empresa, nit_empresa FROM empresas ORDER BY nombre_empresa ASC";
         $result1 = $mysqli->query($query1);
+
+        require('conexion.php');
+        $query2 = "SELECT nombre_trabajador, cedula_trabajador, telefono_trabajador, tipo_trabajador, genero_trabajador FROM trabajador ORDER BY nombre_trabajador ASC";
+        $resultado2 = $mysqli->query($query2);
     ?>
     
     <h1>CREAR TRABAJADOR</h1>
@@ -91,7 +96,32 @@
                 <td><input type="submit" value="GUARDAR"></td>
             </tr>
         </table>
-
     </form>
+    <br>
+    <h2 align="center">TODOS LOS TRABAJADORES</h2>
+    <table border="1" align="center">
+        <tr>
+            <th>NOMBRE</th> <th>CEDULA</th> <th>TELEFONO</th> <th>TIPO DE TRABAJADOR</th> <th>GÉNERO</th>
+        </tr>
+        <?php
+            while($trabajadores = mysqli_fetch_array($resultado2)){
+                $nombre = $trabajadores['0'];
+                $cedula =$trabajadores['1'];
+                $telefono = $trabajadores['2'];
+                $tipoTrabajador = $trabajadores['3'];
+                $genero = $trabajadores['4'];
+
+                echo "<tr>";
+                echo "<td>";  echo $nombre;           echo "</td>";
+                echo "<td>";  echo $cedula;           echo "</td>";
+                echo "<td>";  echo $telefono;         echo "</td>";
+                echo "<td>";  echo $tipoTrabajador;   echo "</td>";
+                echo "<td>";  echo $genero;           echo "</td>";
+                echo "</tr>";
+            }
+            mysqli_free_result($resultado2);
+            mysqli_close($mysqli);
+        ?>
+    </table>
 </body>
 </html>

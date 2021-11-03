@@ -9,7 +9,11 @@
     <?php
         require('conexion.php');
         $query1 = "SELECT id_empresa, nombre_empresa, nit_empresa FROM empresas ORDER BY nombre_empresa ASC";
-        $result = $mysqli->query($query1);
+        $result1 = $mysqli->query($query1);
+
+        $query2 = "SELECT nombre_sede, municipio_sede, departamento_sede, direccion_sede FROM sede ORDER BY nombre_sede ASC";
+        $result2 = $mysqli->query($query2);
+
     ?>
     
     <h1>CREAR SEDE</h1>
@@ -21,7 +25,7 @@
                     <select name="id_empresa" id="id_empresa" style="text-transform:uppercase;">
                         <option value ="">--SELECCIONE--</option>
                         <?php
-                            while($row = mysqli_fetch_array($result))
+                            while($row = mysqli_fetch_array($result1))
                             {   $idEmpresa = $row["id_empresa"];
                                 $nitEmpresa = $row["nit_empresa"];
                                 $nombreEmpresa = $row["nombre_empresa"];
@@ -48,6 +52,30 @@
             </tr>
         </table>
     </form>    
+    <br>
+    <h2 align="center">TODAS LAS SEDES</h2>
+    <table border="1" align="center">
+        <tr>
+            <th>NOMBRE</th> <th>MUNICIPIO</th> <th>DEPARTAMENTO</th>
+            <th>DIRECCIÓN</th>
+        </tr>
+        <?php
+            while($sedes=mysqli_fetch_array($result2)){
+                $nombre = $sedes['0'];
+                $municipio = $sedes['1'];
+                $departamento = $sedes['2'];
+                $direccion = $sedes['3'];
 
+                echo "<tr>";
+                echo "<td>";  echo $nombre;         echo "</td>";
+                echo "<td>";  echo $municipio;      echo "</td>";
+                echo "<td>";  echo $departamento;   echo "</td>";
+                echo "<td>";  echo $direccion;      echo "</td>";
+                echo "</tr>";
+            }
+            mysqli_free_result($result2);
+            mysqli_close($mysqli);
+        ?>
+    </table>
 </body>
 </html>

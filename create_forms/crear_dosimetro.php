@@ -1,11 +1,16 @@
 <!DOCTYPE html>
+<?php
+    require('conexion.php');
+    $query1 = "SELECT codigo_dosimeter, tipo_dosimetro, fecha_ingreso_servicio, ocupacion, periodo_recambio FROM dosimetro ORDER BY codigo_dosimeter";
+    $resultado1 = $mysqli->query($query1);
+?>
 <html>
 <head>
     <meta charset="utf-8">
     <title>CREAR DOSIMETRO principal</title>
 </head>
 <body>
-    <h1>CREAR DOSIMETRO</h1>
+    <h1>CREAR DOSÍMETRO</h1>
     <form action="registrar_dosimetro.php" method="POST">
         <table>
             <tr>
@@ -13,7 +18,7 @@
                 <td><input type="number" name="numero_dosimetro" id="numero_dosimetro"></td>
             </tr>
             <tr>
-                <td>TIPO DE DOSÍMERTRO:</td>
+                <td>TIPO DE DOSÍMETRO:</td>
                 <td>&nbsp;
                     <select name="tipo_dosimetro" id="tipo_dosimetro" style="text-transform:uppercase;">
                         <option value="">Seleccione...</option>
@@ -101,5 +106,32 @@
             </tr>
         </table>
     </form>
+    <br>
+    <h2 align="center">TODOS LOS DOSÍMETROS</h2>
+    <table border="1" align="center">
+        <tr>
+            <th>CODIGO</th> <th>TIPO DE DOSÍMERTRO</th> <th>FECHA DE INGRESO AL SERVICIO</th> 
+            <th>OCUPACIÓN DEL DOSÍMETRO</th> <th>PERIODO DE RECAMBIO</th>
+        </tr>
+        <?php
+            while($dosimetros = mysqli_fetch_array($resultado1)){
+                $codigo = $dosimetros['0'];
+                $tipo = $dosimetros['1'];
+                $fechaIng = $dosimetros['2'];
+                $ocupacion = $dosimetros['3'];
+                $periodoRCam = $dosimetros['4'];
+
+                echo "<tr>";
+                echo "<td>";  echo $codigo;     echo "</td>";
+                echo "<td>";  echo $tipo;       echo "</td>";
+                echo "<td>";  echo $fechaIng;   echo "</td>";
+                echo "<td>";  echo $ocupacion;  echo "</td>";
+                echo "<td>";  echo $periodoRCam;echo "</td>";
+                echo "</tr>";
+            }
+            mysqli_free_result($resultado1);
+            mysqli_close($mysqli);
+        ?>
+    </table>
 </body>
 </html>

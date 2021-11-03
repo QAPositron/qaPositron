@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <?php
         require('conexion.php');
-        $query = "SELECT id_empresa, nombre_empresa, nit_empresa FROM empresas ORDER BY nombre_empresa ASC" ;
-        $resultado = $mysqli->query($query);
+        $query1 = "SELECT id_empresa, nombre_empresa, nit_empresa FROM empresas ORDER BY nombre_empresa ASC" ;
+        $resultado1 = $mysqli->query($query1);
+
+        $query2 = "SELECT nombres_contacto, apellidos_contacto, correo_contacto, telefono_contacto, cargo_contacto FROM contactos ORDER BY nombres_contacto ASC";
+        $resultado2 = $mysqli->query($query2);
 ?>
 
 <html>
@@ -52,7 +55,7 @@
                     <select id="lista_empresas" name="lista_empresas" style="text-transform:uppercase;"> 
                         <option value="0">--SELECCIONE EMPRESA--</option>
                         <?php 
-                        while($row = $resultado->fetch_assoc()) {   ?>
+                        while($row = $resultado1->fetch_assoc()) {   ?>
                             <option value="<?php echo $row['id_empresa']; ?>"><?php echo 
                             $row['nombre_empresa']; ?></option>
                         <?php } ?>
@@ -83,6 +86,32 @@
         </table>
 
     </form>
+    <br>
+    <h2 align="center">TODAS LOS CONTACTOS</h2>
+    <table border="1" align="center">
+        <tr>
+            <th>NOMBRES</th> <th>APELLIDOS</th> <th>CORREO</th> 
+            <th>TÉLEFONO</th> <th>CARGO</th>
+        </tr>
+        <?php
+            while($contactos=mysqli_fetch_array($resultado2)){
+                $nombres = $contactos['0'];
+                $apellidos = $contactos['1'];
+                $correo = $contactos['2'];
+                $telefono = $contactos['3'];
+                $cargo = $contactos['4'];
 
+                echo "<tr>";
+                echo "<td>";  echo $nombres;   echo "</td>";
+                echo "<td>";  echo $apellidos; echo "</td>";
+                echo "<td>";  echo $correo;    echo "</td>";
+                echo "<td>";  echo $telefono;  echo "</td>";
+                echo "<td>";  echo $cargo;     echo "</td>";
+                echo "</tr>";
+            }
+            mysqli_free_result($resultado2);
+            mysqli_close($mysqli);
+        ?>
+    </table>
 </body>
 </html>
