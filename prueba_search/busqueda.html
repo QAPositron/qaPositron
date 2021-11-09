@@ -1,35 +1,31 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRUEBA SEARCH</title>
-   
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BUSCAR EMPRESA</title>
+    
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     
-    <script
+    <!--<script
         src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
         crossorigin="anonymous">
     </script>
-    <script src="peticion.js"></script> 
+    <script src="peticion.js"></script>-->
 </head>
 <body>
     <div class="container p-auto">
-        <header>
-            <div class="alert alert-info">
-                <h2>BUSCADOR EN TIEMPO REAL CON AJAX</h2>
-            </div>
-        </header>
-        <div class="container p-auto">
-            <div class="row pt-5">
-                <div class="col"></div>
-                <div class="col">
-                    <label for="exampleFormControlInput1" class="form-label">BUSCAR: </label>
+        <div class="row pt-5">
+            <div class="col"></div>
+            <div class="col">
+                <from  action="consulta.php" method="POST">
+                    <label class="form-label">SELECCIONE: </label>
                     <select class="form-select form-select-sm"  name="tipo" id="tipo">
                         <option value="0">-SELECCIONE-</option>
-                        <option value="1">EMPRESAS</option>
+                        <option value="1">--EMPRESAS--</option>
                         <option value="2">SEDES</option>
                         <option value="3">CONTACTOS</option>
                         <option value="4">TRABAJADORES</option>
@@ -37,19 +33,23 @@
                     </select>
                     <br>
                     <label for="exampleFormControlInput1" class="form-label">BUSCAR: </label>
-                    <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="--BUSCAR--">
-                </div>    
-                <div class="col"></div>
+                    <input type="text" class="form-control" id="busqueda" name="busqueda" placeholder="--SELECCIONE--">
+                    <br>
+                    <input class="btn btn-primary" type="submit" name="envio" id="envio">
+                </from>
             </div>
+            <div class="col"></div>
         </div>
         <br>
-        <div class="row pt-5 bg-warning" id="tabla_resultado">
+        <div class="row pt-5" id="tabla_resultado">
 
         </div>
-            
+       
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="../js/bootstrap.min.js"></script>
-    
+
 </body>
 </html>
+   

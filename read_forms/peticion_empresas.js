@@ -8,7 +8,7 @@ function obtener_registros(empresas)
         url : 'consulta_empresas.php',
         type : 'POST',
         dataType : 'html',
-        data : { empresas: empresas},
+        data : { empresas: empresas, tipo: tipo}
     })
     .done(function(resultado){
         $("#tabla_resultado").html(resultado);
